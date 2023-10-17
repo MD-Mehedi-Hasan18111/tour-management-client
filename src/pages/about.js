@@ -1,16 +1,18 @@
 import Heading from "@/global/components/Shared/Heading";
-import Banner from "@/global/components/UI/Home/Banner";
 import RootLayout from "@/global/layouts/RootLayout";
+import React from "react";
 
-const Home = () => {
+const About = () => {
   return (
     <>
-      <Heading title={"Home"} />
+      <Heading title={"About"} />
       <RootLayout>
-        <Banner />
+        <div>
+          <h2>About Page</h2>
+        </div>
       </RootLayout>
     </>
   );
 };
 
-export default Home;
+export default About;
