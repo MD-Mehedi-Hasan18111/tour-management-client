@@ -5,9 +5,9 @@ import { TfiGallery } from "react-icons/tfi";
 import { FaUserAlt } from "react-icons/fa";
 
 export const userMenus = [
-  { menuName: "home", icon: <AiOutlineHome className="text-[20px]" /> },
-  { menuName: "bookings", icon: <TbBrandBooking className="text-[20px]" /> },
-  { menuName: "blogs", icon: <ImBook className="text-[20px]" /> },
-  { menuName: "gallery", icon: <TfiGallery className="text-[20px]" /> },
-  { menuName: "Profile", icon: <FaUserAlt className="text-[20px]" /> },
+  { menuName: "home", icon: <AiOutlineHome className="lg:text-[20px] text-[18px]" /> },
+  { menuName: "bookings", icon: <TbBrandBooking className="lg:text-[20px] text-[18px]" /> },
+  { menuName: "blogs", icon: <ImBook className="lg:text-[20px] text-[18px]" /> },
+  { menuName: "gallery", icon: <TfiGallery className="lg:text-[20px] text-[18px]" /> },
+  { menuName: "Profile", icon: <FaUserAlt className="lg:text-[20px] text-[18px]" /> },
 ];

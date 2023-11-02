@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }) => {
     <div>
       <div className="flex bg-[#ecf0f1]/60 w-screen h-screen">
         {/* Sidebar Start */}
-        <div className="md:block hidden bg-[white] border h-screen shadow-md w-[350px] py-4 px-6 relative">
+        <div className="lg:block hidden bg-[white] border h-screen shadow-md w-[350px] py-4 px-6 relative">
           {/* logo */}
           <div className="mb-2">
             <img
@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }) => {
           <hr />
           {/* Menus Start */}
           <div className="mt-6">
-            <h3 className="text-[16px] font-[500] mb-4 ml-3">MENU</h3>
+            <h3 className="lg:text-[18px] text-[16px] font-[500] mb-4 ml-3">MENU</h3>
             <div className="flex flex-col space-y-6">
               {userMenus?.map((menu, i) => {
                 return (

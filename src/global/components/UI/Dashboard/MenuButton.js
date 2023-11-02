@@ -14,7 +14,7 @@ const MenuButton = ({ activeMenu, setActiveMenu, menu, toggleDrawer }) => {
       }`}
     >
       {menu?.icon}
-      <h4 className="text-[18px] font-[400] capitalize">{menu?.menuName}</h4>
+      <h4 className="lg:text-[18px] text-[16px] font-[400] capitalize">{menu?.menuName}</h4>
     </button>
   );
 };

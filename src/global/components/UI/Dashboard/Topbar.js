@@ -3,8 +3,10 @@ import { BiLogOut, BiUser } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { FiMenu } from "react-icons/fi";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const Topbar = ({ toggleDrawer }) => {
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -32,10 +34,15 @@ const Topbar = ({ toggleDrawer }) => {
   return (
     <div className="py-6 px-10">
       <div className="relative flex items-center justify-between">
-        <button onClick={toggleDrawer}>
+        <button onClick={toggleDrawer} className="lg:hidden">
           <FiMenu className="text-[20px] text-gray-500" />
         </button>
-        <button className="md:text-[18px] text-[16px] font-[500] text-[#7f8c8d] hover:text-[#7f8c8d]/80">
+        <button
+          onClick={() => {
+            router.push("/");
+          }}
+          className="md:text-[18px] text-[16px] font-[500] text-[#7f8c8d] hover:text-[#7f8c8d]/80"
+        >
           Back to website
         </button>
         <button
