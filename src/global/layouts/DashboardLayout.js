@@ -11,7 +11,7 @@ import "react-modern-drawer/dist/index.css";
 const DashboardLayout = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState("home");
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -31,7 +31,9 @@ const DashboardLayout = ({ children }) => {
           <hr />
           {/* Menus Start */}
           <div className="mt-6">
-            <h3 className="lg:text-[18px] text-[16px] font-[500] mb-4 ml-3">MENU</h3>
+            <h3 className="lg:text-[18px] text-[16px] font-[500] mb-4 ml-3">
+              MENU
+            </h3>
             <div className="flex flex-col space-y-6">
               {userMenus?.map((menu, i) => {
                 return (
@@ -39,6 +41,7 @@ const DashboardLayout = ({ children }) => {
                     activeMenu={activeMenu}
                     setActiveMenu={setActiveMenu}
                     menu={menu}
+                    setIsOpen={setIsOpen}
                   />
                 );
               })}
@@ -78,7 +81,7 @@ const DashboardLayout = ({ children }) => {
                       activeMenu={activeMenu}
                       setActiveMenu={setActiveMenu}
                       menu={menu}
-                      toggleDrawer={toggleDrawer}
+                      setIsOpen={setIsOpen}
                     />
                   );
                 })}
