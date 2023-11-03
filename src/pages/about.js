@@ -1,16 +1,22 @@
+import Footer from "@/global/components/Shared/Footer";
 import Heading from "@/global/components/Shared/Heading";
+import { AboutBg } from "@/global/components/UI/About/AboutBg";
+import AboutExperience from "@/global/components/UI/About/AboutExperience";
+import AboutWhy from "@/global/components/UI/About/AboutWhy";
+import Testimonials from "@/global/components/UI/About/Testimonials";
 import RootLayout from "@/global/layouts/RootLayout";
-import React from "react";
 
 const About = () => {
   return (
     <>
       <Heading title={"About"} />
       <RootLayout>
-        <div>
-          <h2>About Page</h2>
-        </div>
+        <AboutBg />
+        <AboutExperience />
+        <AboutWhy />
+        <Testimonials />
       </RootLayout>
+      <Footer />
     </>
   );
 };
