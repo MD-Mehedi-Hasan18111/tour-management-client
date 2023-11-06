@@ -10,78 +10,7 @@ const Register = () => {
   function handleSubmit() {}
 
   return (
-    // <div>
-    //   <div className="card w-full flex flex-col items-center">
-    //     <h4 className="card-header text-4xl font-bold my-6">Register</h4>
-    //     <div className="card-body w-2/6  bg-sky-200">
-    //       <form onSubmit={handleSubmit} className="md:w-[70%] w-10/12 grid">
-    //         <div className="form-group pb-4">
-    //           <label>First Name</label>
-    //           <input
-    //             name="firstName"
-    //             type="text"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <div className="form-group pb-4">
-    //           <label>Last Name</label>
-    //           <input
-    //             name="lastName"
-    //             type="text"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <div className="form-group pb-4">
-    //           <label>Email</label>
-    //           <input
-    //             name="email"
-    //             type="email"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <div className="form-group pb-4">
-    //           <label>Gender</label>
-    //           <input
-    //             name="gender"
-    //             type="text"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <div className="form-group pb-4">
-    //           <label>Mobile Code</label>
-    //           <input
-    //             name="mobilecode"
-    //             type="text"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <div className="form-group pb-4">
-    //           <label>Phone Number</label>
-    //           <input
-    //             name="phonenumber"
-    //             type="number"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-
-    //         <div className="form-group pb-6">
-    //           <label>Password</label>
-    //           <input
-    //             name="password"
-    //             type="password"
-    //             className="input input-bordered w-full "
-    //           />
-    //         </div>
-    //         <button className="btn btn-primary">Register</button>
-    //         <Link href="/login" className="btn btn-link">
-    //           Cancel
-    //         </Link>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
-
-    <div class="flex flex-row justify-start bg-[#e4eaf1] ">
+    <div class="flex md:flex-row flex-col justify-start bg-[#e4eaf1] ">
       <div class="basis-1/2 ">
         <Image
           src="/../images/register-removebg-preview.png"
@@ -91,7 +20,7 @@ const Register = () => {
         />
       </div>
       <div class="basis-1/2 p-5 text-start drop-shadow-lg">
-        <form className="container mx-auto w-[600px]">
+        <form className="container mx-auto md:w-[600px] w-full">
           <div className="space-y-12 ">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-4xl font-bold my-6 text-center">
