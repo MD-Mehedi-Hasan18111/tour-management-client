@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/styles/banner.module.css";
+import Login from "@/global/components/Shared/Login";
 
 const Banner = () => {
   return (
@@ -20,6 +21,9 @@ const Banner = () => {
         <h5 className="text-white md:text-[28px] text-[18px] font-[400] mt-5">
           One site, 300.000+ experiences you'll remember.
         </h5>
+
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        <Login />
       </div>
     </div>
   );
