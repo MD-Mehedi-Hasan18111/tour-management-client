@@ -6,7 +6,7 @@ import { IoIosTimer, IoIosArrowForward } from "react-icons/io";
 const TopTour = () => {
   return (
     <div
-      class="bg-[url('https://plchldr.co/i/1600x300?&bg=67229f&fc=f8f8f8&text=1600x300')] bg-cover bg-center bg-no-repeat mb-8"
+      className="mb-8"
       // className="w-full h-screen"
       // style="background-image: url('../../../../../public/images/topTourBg.png')"
     >
