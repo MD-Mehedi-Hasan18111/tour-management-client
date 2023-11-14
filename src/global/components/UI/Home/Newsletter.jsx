@@ -26,11 +26,14 @@ const Newsletter = () => {
               deals by email.
             </p>
           </div>
-          <div className="md:basis-3/5 w-full my-5" data-aos="fade-up">
+          <div
+            className="md:basis-3/5 w-full md:w-[550px] my-5"
+            data-aos="fade-up"
+          >
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-xl py-5 px-4 mb-5 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              class="appearance-none block md:text-2xl text-xl w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-xl py-5 px-4 mb-5 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
-              placeholder="Email address"
+              placeholder="Enter your Email"
             ></input>
             <button
               data-aos-anchor-placement="bottom-bottom"

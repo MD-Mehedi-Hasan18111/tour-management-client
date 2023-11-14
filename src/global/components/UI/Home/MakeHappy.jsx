@@ -13,7 +13,7 @@ const MakeHappy = () => {
         How we can help your journey
       </p>
       <div className="my-4 md:mx-40 flex flex-col items-center gap-10 justify-center md:flex md:flex-row  md:justify-between">
-        <div className="card md:w-96 w-[400px] bg-sky-100">
+        <div className="card md:w-96 w-[400px] shadow-xl">
           <figure>
             <FaMapMarkerAlt className="text-8xl p-4 bg-green-500 m-4 text-orange-700 rounded-full" />
           </figure>
@@ -25,7 +25,7 @@ const MakeHappy = () => {
             </p>
           </div>
         </div>
-        <div className="card w-96 bg-sky-100">
+        <div className="card  md:w-96 w-[400px] shadow-xl">
           <figure>
             <SiYourtraveldottv className="text-8xl p-4 bg-green-500 m-4 text-orange-700 rounded-full" />
           </figure>
@@ -37,7 +37,7 @@ const MakeHappy = () => {
             </p>
           </div>
         </div>
-        <div className="card w-96 bg-sky-100">
+        <div className="card md:w-96 w-[400px] shadow-xl">
           <figure>
             <FaCcAmazonPay className="text-8xl p-4 bg-green-500 m-4 text-orange-700 rounded-full" />
           </figure>
