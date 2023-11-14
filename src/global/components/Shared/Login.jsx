@@ -2,15 +2,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdSecurity } from "react-icons/md";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BiSolidHide } from "react-icons/bi";
+import { AiFillEye, AiTwotoneEyeInvisible } from "react-icons/ai";
+import { HiShieldCheck } from "react-icons/hi";
+import { GrMail } from "react-icons/gr";
 // const axios = require("axios");
 
 const Login = () => {
   const router = useRouter();
+  const [passwordType, setPasswordType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [isLoad, setIsLoad] = useState(false);
 
   //   const handleSubmit = async (e) => {
   //     e.preventDefault();
@@ -49,137 +55,104 @@ const Login = () => {
         Login Now
       </button>
       <dialog id="my_modal_5" className="modal ">
-        <div className="modal-box w-11/12 max-w-5xl">
-          <div class=" w-full flex flex-col items-center">
-            <h3 className="text-4xl flex font-bold my-6">
+        <div className="modal-box lg:w-8/12 md:w-7/12 w-11/12 max-w-2xl">
+          <div class="w-full flex flex-col items-center">
+            <h3 className="lg:text-[24px] text-[20px] flex items-center font-bold my-6">
               {" "}
               <span className="me-3">
-                <FaUser className="text-info" />{" "}
+                <FaUser className="text-blue-400 lg:text-[24px] text-[20px]" />{" "}
               </span>{" "}
-              Login Now{" "}
+              Login
             </h3>
             <form
-              // onSubmit={handleSubmit}
-              className="md:w-[90%] w-10/12 grid"
+              // onSubmit={handleManualLogin}
+              className="lg:mt-[30px] mt-[20px]"
             >
-              <div className="relative  bg-white ">
-                <label
-                  class="block text-gray-700 text-2xl font-medium mb-2"
-                  for="username"
-                >
-                  Username:
-                </label>
-                <MdEmail className="absolute text-4xl text-sky-300 z-2 mt-4 mx-3 rounded-md" />
-                <input
-                  type="email"
-                  placeholder={` Enter Your Email `}
-                  className="input input-bordered w-full h-16 z-1 py-[3px] pl-14 "
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
-              <br />
-              <div className="relative  bg-white ">
-                <label
-                  class="block text-gray-700 text-2xl font-medium mb-2"
-                  for="username"
-                >
-                  Password:
-                </label>
-                <BiSolidHide className="absolute text-4xl text-sky-300 z-2 mt-4 mx-3 rounded-md" />
-                <input
-                  type="password"
-                  placeholder="Enter Your Password"
-                  className="input input-bordered w-full h-16 z-1 py-[3px] pl-14 "
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </div>
-              <br />
-              <p className="text-center my-4 ">
-                {" "}
-                <Link
-                  href="/register"
-                  className="btn btn-link mx-auto no-underline text-red-500"
-                >
-                  Forgot Password
-                </Link>
-              </p>
-              <button
-                type="submit"
-                className="btn mx-auto md:w-2/5 w-full btn-info md:px-40 px-6 "
+              <div
+                className={`flex flex-col justify-center lg:space-y-8 space-y-6`}
               >
-                Login
-              </button>
-              <Link
-                href="/register"
-                className="btn btn-link text-sky-500 no-underline"
-              >
-                Create An Account
-              </Link>
-            </form>
-            {/* <div class="w-full max-w-xs">
-              <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div class="mb-4">
-                  <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="username"
+                <div>
+                  <div
+                    className={`flex items-center lg:w-[630px] w-full mx-auto ${
+                      errorEmail !== "" ? "lg:mb-1.5" : "mb-0"
+                    }`}
                   >
-                    Username
-                  </label>
-                  <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                  />
+                    <div className="flex items-center border border-r-0 border-gray-300 rounded-l-[10px] lg:px-5 px-2.5 lg:h-[52px] h-[38px]">
+                      <GrMail className="lg:text-[24px] text-[20px] text-[#7E8597]" />
+                    </div>
+                    <input
+                      onChange={(e) => handleEmail(e)}
+                      type="email"
+                      placeholder="Email Address"
+                      className="lg:w-[623px] w-full lg:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-l-0 rounded-r-[10px] px-1 lg:text-[16px] text-[12px]"
+                      required
+                    />
+                  </div>
+                  {errorEmail && (
+                    <span className="text-red-500 lg:text-[16px] text-[12px]  lg:ml-[130px]">
+                      {errorEmail}
+                    </span>
+                  )}
                 </div>
-                <div class="mb-6">
-                  <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    for="password"
-                  >
-                    Password
-                  </label>
+
+                <div className="flex items-center lg:w-[630px] w-full mx-auto">
+                  <div className="flex items-center border border-r-0 border-gray-300 rounded-l-[10px] lg:px-5 px-2.5 lg:h-[52px] h-[38px]">
+                    <HiShieldCheck className="lg:text-[24px] text-[20px] text-[#7E8597]" />
+                  </div>
                   <input
-                    class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="******************"
+                    onChange={(e) => setPassword(e.target.value)}
+                    type={passwordType}
+                    placeholder="Password"
+                    className=" lg:w-[623px] w-full lg:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-l-0 border-r-0 px-1 lg:text-[16px] text-[12px]"
+                    required
                   />
-                  <p class="text-red-500 text-xs italic">
-                    Please choose a password.
-                  </p>
+                  <div className="flex items-center border border-l-0 border-gray-300 rounded-r-[10px] lg:px-5 px-2.5 lg:h-[52px] h-[38px]">
+                    {passwordType == "password" ? (
+                      <AiFillEye
+                        onClick={() => setPasswordType("text")}
+                        className="cursor-pointer lg:text-[26px] text-[22px] text-blue-400"
+                      />
+                    ) : (
+                      <AiTwotoneEyeInvisible
+                        onClick={() => setPasswordType("password")}
+                        className="cursor-pointer lg:text-[26px] text-[22px] text-blue-400"
+                      />
+                    )}
+                  </div>
                 </div>
-                <div class="flex items-center justify-between">
+                <h4
+                  // onClick={() => {
+                  //   router.push("/forgot-password");
+                  // }}
+                  className="cursor-pointer text-[#828282] hover:text-gray-700 lg:text-[14px] text-[12px] text-center"
+                >
+                  Forgot Password?
+                </h4>
+                {isLoad ? (
                   <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="button"
+                    disabled
+                    className="lg:text-[16px] text-[14px] rounded-[10px] bg-[#DBB7FF] lg:w-[336px] w-[236px] lg:py-[12px] py-[10px]  text-[#262626] mx-auto font-[600] flex justify-center"
                   >
-                    Sign In
+                    <span className="loading loading-spinner loading-md"></span>
                   </button>
-                  <a
-                    class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                    href="#"
+                ) : (
+                  <button
+                    type="submit"
+                    className="lg:text-[16px] text-[14px] rounded-[10px] bg-blue-400 text-white lg:w-[336px] w-[236px] lg:py-[16px] py-[12px]  text-[#262626] mx-auto font-[600]"
                   >
-                    Forgot Password?
-                  </a>
-                </div>
-              </form>
-              <p class="text-center text-gray-500 text-xs">
-                &copy;2020 Acme Corp. All rights reserved.
-              </p>
-            </div> */}
-          </div>
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
+                    Log in
+                  </button>
+                )}
+              </div>
             </form>
+            <p className="text-[#828282] mt-4 text-[14px]">
+              Haven't register yet? <Link className="text-blue-400 font-[500]" href="/register">Register</Link>
+            </p>
           </div>
         </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
       </dialog>
     </div>
   );
