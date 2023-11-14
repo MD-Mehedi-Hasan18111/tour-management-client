@@ -81,7 +81,7 @@ const Login = () => {
                       <GrMail className="lg:text-[24px] text-[20px] text-[#7E8597]" />
                     </div>
                     <input
-                      onChange={(e) => handleEmail(e)}
+                      // onChange={(e) => handleEmail(e)}
                       type="email"
                       placeholder="Email Address"
                       className="lg:w-[623px] w-full lg:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-l-0 rounded-r-[10px] px-1 lg:text-[16px] text-[12px]"
@@ -146,7 +146,10 @@ const Login = () => {
               </div>
             </form>
             <p className="text-[#828282] mt-4 text-[14px]">
-              Haven't register yet? <Link className="text-blue-400 font-[500]" href="/register">Register</Link>
+              Haven't register yet?{" "}
+              <Link className="text-blue-400 font-[500]" href="/register">
+                Register
+              </Link>
             </p>
           </div>
         </div>

@@ -3,6 +3,8 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";
 import Image from "next/image";
+import backgroundImage from "@/../../public/images/regis1.webp";
+import { FaUser } from "react-icons/fa";
 // import img from "../../images/register-removebg-preview.png";
 
 const Register = () => {
@@ -10,22 +12,28 @@ const Register = () => {
   function handleSubmit() {}
 
   return (
-    <div class="flex md:flex-row flex-col justify-start bg-[#e4eaf1] ">
-      <div class="basis-1/2 ">
-        <Image
-          src="/../images/register-removebg-preview.png"
-          alt="Picture of the author"
-          height={1000}
-          width={1000} // just an example
-        />
-      </div>
-      <div class="basis-1/2 p-5 text-start drop-shadow-lg">
-        <form className="container mx-auto md:w-[800px] w-full">
+    <div
+      class="flex md:flex-row flex-col justify-center items-center h-[80vh]"
+      style={{
+        // use the src property of the image object
+        backgroundImage: `url(${backgroundImage.src})`,
+        // other styles
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div class=" drop-shadow-lg ">
+        <form className="container  md:w-[800px] w-full bg-white p-16 ">
           <div className="space-y-12 ">
-            <div className="border-b border-gray-900/10 pb-12">
-              <h2 className="text-5xl font-bold my-6 text-center">
+            <div className="border-b mx-auto border-gray-900/10 pb-12">
+              <h3 className="lg:text-[24px] text-[20px] flex items-center mx-auto font-bold my-6">
+                {" "}
+                <span className="me-3">
+                  <FaUser className="text-blue-400 lg:text-[24px] text-[20px]" />{" "}
+                </span>{" "}
                 Register Form
-              </h2>
+              </h3>
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-3">
