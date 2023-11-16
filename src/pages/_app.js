@@ -1,4 +1,5 @@
-import { store } from "@/global/redux/store";
+import { persistor, store } from "@/global/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import "@/styles/globals.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }) {
   }, []);
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Component {...pageProps} />
+      </PersistGate>
     </Provider>
   );
 }
