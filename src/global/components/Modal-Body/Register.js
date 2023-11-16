@@ -4,6 +4,7 @@ import { HiShieldCheck } from "react-icons/hi";
 import { GrMail } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoMdGlobe } from "react-icons/io";
+import { RegisterUser } from "@/global/services/Auth";
 
 // Email regular expression
 const regexEmailValidation =
@@ -79,6 +80,31 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     };
   }, [wrapperRef]);
 
+  /******************************
+    Sign Up User Integration
+    *****************************/
+  const signUpUser = async (e) => {
+    e.preventDefault();
+    const userData = {
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+      gender: gender,
+      email: email,
+      mobileCode: mobileCode,
+      phoneNumber: mobile,
+    };
+    setIsLoad(true);
+    const res = await RegisterUser(userData);
+    if (res?.status === 200) {
+      setIsLoad(false);
+      console.log(res);
+    } else {
+      setIsLoad(false);
+      console.log(res);
+    }
+  };
+
   return (
     <div class="w-full flex flex-col items-center">
       <h3 className="lg:text-[24px] text-[20px] flex items-center font-bold my-6">
@@ -88,10 +114,7 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
         </span>{" "}
         Register
       </h3>
-      <form
-        // onSubmit={handleManualLogin}
-        className="lg:mt-[20px] mt-[10px]"
-      >
+      <form onSubmit={signUpUser} className="lg:mt-[20px] mt-[10px]">
         <div className={`flex flex-col justify-center lg:space-y-8 space-y-6`}>
           <div className={`flex items-center lg:w-[630px] w-full mx-auto`}>
             <div className="flex items-center border border-r-0 border-gray-300 rounded-l-[10px] lg:px-5 px-2.5 lg:h-[52px] h-[38px]">
