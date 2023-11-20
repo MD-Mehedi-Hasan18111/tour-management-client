@@ -11,3 +11,12 @@ export const RegisterUser = async (data) => {
 };
 
 // login service function
+export const LoginUser = async (data) => {
+  try {
+    const url = `/auth/login`;
+    const response = await API.post(url, data);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

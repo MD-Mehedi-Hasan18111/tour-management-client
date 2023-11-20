@@ -3,15 +3,19 @@ import { AiFillEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import { HiShieldCheck } from "react-icons/hi";
 import { GrMail } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
+import { LoginUser } from "@/global/services/Auth";
 
 // Email regular expression
 const regexEmailValidation =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const regexPasswordValidation =
+  /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   const [passwordType, setPasswordType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [isLoad, setIsLoad] = useState(false);
 
@@ -24,6 +28,37 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
       setErrorEmail("Enter valid email address ");
     }
   };
+  // Password input validation
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    if (regexPasswordValidation.test(e.target.value) || e.target.value === "") {
+      setPassword(e.target.value);
+      setErrorPassword("");
+    } else {
+      setErrorPassword(
+        "Minimum 8 characters with at least one capital letter, a small letter, a number and a special character."
+      );
+    }
+  };
+
+  // handle login validation
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const userData = {
+      email: email,
+      password: password,
+    };
+    setIsLoad(true);
+    console.log("handleLogin:", userData);
+    const res = await LoginUser(userData);
+    if (res?.status === 200) {
+      setIsLoad(false);
+      console.log(res);
+    } else {
+      setIsLoad(false);
+      console.log(res);
+    }
+  };
 
   return (
     <div class="w-full flex flex-col items-center">
@@ -34,10 +69,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
         </span>{" "}
         Login
       </h3>
-      <form
-        // onSubmit={handleManualLogin}
-        className="lg:mt-[30px] mt-[20px]"
-      >
+      <form onSubmit={handleLogin} className="lg:mt-[30px] mt-[20px]">
         <div className={`flex flex-col justify-center lg:space-y-8 space-y-6`}>
           <div>
             <div
@@ -68,7 +100,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
               <HiShieldCheck className="lg:text-[24px] text-[20px] text-[#7E8597]" />
             </div>
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handlePassword(e)}
               type={passwordType}
               placeholder="Password"
               className=" lg:w-[623px] w-full lg:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-l-0 border-r-0 px-1 lg:text-[16px] text-[12px]"
