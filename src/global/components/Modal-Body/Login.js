@@ -4,6 +4,8 @@ import { HiShieldCheck } from "react-icons/hi";
 import { GrMail } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
 import { LoginUser } from "@/global/services/Auth";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "@/global/redux/features/Auth/AuthSlice";
 
 // Email regular expression
 const regexEmailValidation =
@@ -12,6 +14,8 @@ const regexPasswordValidation =
   /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
+  const dispatch = useDispatch();
+
   const [passwordType, setPasswordType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,11 +53,14 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
       password: password,
     };
     setIsLoad(true);
-    console.log("handleLogin:", userData);
     const res = await LoginUser(userData);
     if (res?.status === 200) {
       setIsLoad(false);
-      console.log(res);
+      setIsOpenLoginModal(false);
+      setEmail("");
+      setPassword("");
+      dispatch(setUser(res?.data?.data?.userData));
+      dispatch(setToken(res?.data?.data?.accessToken));
     } else {
       setIsLoad(false);
       console.log(res);
@@ -81,6 +88,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
                 <GrMail className="lg:text-[24px] text-[20px] text-[#7E8597]" />
               </div>
               <input
+                defaultValue={email}
                 onChange={(e) => handleEmail(e)}
                 type="email"
                 placeholder="Email Address"
@@ -100,6 +108,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
               <HiShieldCheck className="lg:text-[24px] text-[20px] text-[#7E8597]" />
             </div>
             <input
+              defaultValue={password}
               onChange={(e) => handlePassword(e)}
               type={passwordType}
               placeholder="Password"

@@ -6,14 +6,16 @@ import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
 import { HiDocumentText, HiOutlineMail } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { BiLogOut, BiSolidDashboard } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RiLoginCircleLine } from "react-icons/ri";
 import { FaRegRegistered } from "react-icons/fa";
 import Login from "../Modal-Body/Login";
 import Register from "../Modal-Body/Register";
+import { logOut } from "@/global/redux/features/Auth/AuthSlice";
 
 const Navbar = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -46,7 +48,9 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
 
   const wrapperRef = useRef(null);
 
@@ -167,21 +171,21 @@ const Navbar = () => {
               className="flex items-center"
               onClick={toggleDropdown}
             >
-              {false ? (
+              {user?.profileImage ? (
                 <img
-                  src={""}
+                  src={user?.profileImage}
                   alt="User"
                   className="md:h-[48px] md:w-[48px] h-[30px] w-[30px] rounded-full"
                 />
               ) : (
                 <div className="bg-[#0D1218] md:h-[48px] h-[30px] md:w-[48px] w-[30px] rounded-[50%] flex items-center justify-center Dm text-white font-[700] md:text-[18px] text-[14px]">
-                  {"M"}
-                  {"H"}
+                  {user?.firstName?.charAt(0)}
+                  {user?.lastName?.charAt(0)}
                 </div>
               )}
               <div className="md:block hidden text-left ml-2">
                 <p className="ml-2 md:text-[16px] text-[12px] text-[#262626] Dm">
-                  MD Mehedi Hasan
+                  {user?.firstName} {user?.lastName}
                 </p>
                 {/* <p className="ml-2 md:text-[14px] text-[12px] text-[#828282] Dm capitalize">
                   Admin
@@ -199,7 +203,7 @@ const Navbar = () => {
                 className="absolute right-0 mt-2 md:w-[300px] w-auto bg-white border rounded shadow"
               >
                 <p className="md:hidden block w-full text-left p-2 md:text-[16px] text-[12px] text-[#262626] Dm">
-                  MD Mehedi Hasan
+                  {user?.firstName} {user?.lastName}
                   {/* <br />
                   <span className="md:text-[14px] text-[12px] text-[#828282] Dm">
                     Admin
@@ -208,7 +212,7 @@ const Navbar = () => {
                 <p className="block flex items-center space-x-2 w-full text-left px-2 py-2 hover:bg-gray-100 Dm">
                   <HiOutlineMail className="text-[#828282] md:text-[20px] text-[16px]" />
                   <span className="md:text-[14px] text-[12px]">
-                    mdmehedihasan18111@gmail.com
+                    {user?.email}
                   </span>
                 </p>
                 <button
@@ -221,7 +225,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div className="flex items-center space-x-6">
+          <div className={`flex items-center space-x-6 ${user ? "hidden" : "block"}`}>
             <button
               onClick={() => setIsOpenLoginModal(true)}
               className="btn capitalize flex items-center space-x-1"
