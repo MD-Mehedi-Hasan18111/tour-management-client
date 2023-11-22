@@ -47,7 +47,9 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     }
   };
 
-  // handle login validation
+  /******************************
+    Sign In User Integration
+    *****************************/
   const handleLogin = async (e) => {
     e.preventDefault();
     const userData = {

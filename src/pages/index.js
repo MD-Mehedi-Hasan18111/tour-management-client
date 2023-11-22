@@ -5,8 +5,6 @@ import BestOffer from "@/global/components/UI/Home/BestOffer";
 import MakeHappy from "@/global/components/UI/Home/MakeHappy";
 import Newsletter from "@/global/components/UI/Home/Newsletter";
 import OurBlog from "@/global/components/UI/Home/OurBlog";
-import OurFeatured from "@/global/components/UI/Home/OurFeatured";
-import Subscribers from "@/global/components/UI/Home/Subscribers";
 import TopTour from "@/global/components/UI/Home/TopTour";
 import RootLayout from "@/global/layouts/RootLayout";
 
