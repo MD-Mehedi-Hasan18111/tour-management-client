@@ -5,7 +5,6 @@ import React from "react";
 const Dashboard = () => {
   return (
     <DashboardLayout>
-      <Heading title="Dashboard" />
       <div className="w-[400px] mx-auto text-center mt-40">
         {/* Your dashboard content goes here */}
         <h1 className="text-2xl font-semibold">Welcome to the Dashboard</h1>

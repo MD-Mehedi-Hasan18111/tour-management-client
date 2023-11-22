@@ -9,5 +9,5 @@ export const userMenus = [
   { menuName: "bookings", icon: <TbBrandBooking className="lg:text-[20px] text-[18px]" /> },
   { menuName: "blogs", icon: <ImBook className="lg:text-[20px] text-[18px]" /> },
   { menuName: "gallery", icon: <TfiGallery className="lg:text-[20px] text-[18px]" /> },
-  { menuName: "Profile", icon: <FaUserAlt className="lg:text-[20px] text-[18px]" /> },
+  { menuName: "profile", icon: <FaUserAlt className="lg:text-[20px] text-[18px]" /> },
 ];

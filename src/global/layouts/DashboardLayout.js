@@ -10,6 +10,7 @@ import "react-modern-drawer/dist/index.css";
 import Private from "./Private";
 import { useDispatch } from "react-redux";
 import { logOut } from "../redux/features/Auth/AuthSlice";
+import Heading from "../components/Shared/Heading";
 
 const DashboardLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div>
+      <Heading title="Dashboard" />
       <div className="flex bg-[#ecf0f1]/60 w-screen h-screen">
         {/* Sidebar Start */}
         <div className="lg:block hidden bg-[white] border h-screen shadow-md w-[350px] py-4 px-6 relative">
@@ -40,14 +42,7 @@ const DashboardLayout = ({ children }) => {
             </h3>
             <div className="flex flex-col space-y-6">
               {userMenus?.map((menu, i) => {
-                return (
-                  <MenuButton
-                    activeMenu={activeMenu}
-                    setActiveMenu={setActiveMenu}
-                    menu={menu}
-                    setIsOpen={setIsOpen}
-                  />
-                );
+                return <MenuButton menu={menu} setIsOpen={setIsOpen} />;
               })}
             </div>
             <button
@@ -85,14 +80,7 @@ const DashboardLayout = ({ children }) => {
               <h3 className="text-[16px] font-[500] mb-4 ml-3">MENU</h3>
               <div className="flex flex-col space-y-6">
                 {userMenus?.map((menu, i) => {
-                  return (
-                    <MenuButton
-                      activeMenu={activeMenu}
-                      setActiveMenu={setActiveMenu}
-                      menu={menu}
-                      setIsOpen={setIsOpen}
-                    />
-                  );
+                  return <MenuButton menu={menu} setIsOpen={setIsOpen} />;
                 })}
               </div>
             </div>

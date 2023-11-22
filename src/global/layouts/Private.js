@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Private = (WrappedComponent) => {
-  return () => {
+  const Wrapper = (props) => {
     const router = useRouter();
     const token = useSelector((state) => state.auth.token);
 
@@ -12,8 +12,10 @@ const Private = (WrappedComponent) => {
       return null;
     }
 
-    return <WrappedComponent />;
+    return <WrappedComponent {...props} />;
   };
+
+  return Wrapper;
 };
 
 export default Private;
