@@ -108,6 +108,7 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
       setIsOpenRegisterModal(false);
       dispatch(setUser(res?.data?.data?.userData));
       dispatch(setToken(res?.data?.data?.accessToken));
+      e.target.reset();
     } else {
       setIsLoad(false);
       toast.error(res?.response?.data?.message);
@@ -214,7 +215,7 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
 
             <div className="flex items-center md:w-[630px] w-full mx-auto">
               <div
-                className="relative flex justify-between items-center Dm md:w-[150px] w-[160px] md:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-r-0 rounded-l-[10px] px-1 md:text-[16px] text-[12px] cursor-pointer md:px-[20px] px-[10px]"
+                className="relative flex justify-between items-center Dm md:w-[150px] w-[160px] md:h-[52px] h-[38px] focus:outline-none bg-transparent border border-gray-300 border-r-0 rounded-l-[10px] md:text-[16px] text-[12px] cursor-pointer md:px-[20px] px-[10px]"
                 onClick={() => setOpenDropdown1(!openDropdown1)}
                 ref={wrapperRef}
               >
@@ -378,7 +379,7 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
             ) : (
               <button
                 type="submit"
-                className="lg:text-[16px] text-[14px] rounded-[10px] bg-blue-400 hover:bg-blue-300 text-white lg:w-[336px] w-[236px] lg:py-[16px] py-[12px]  text-[#262626] mx-auto font-[600]"
+                className="lg:text-[16px] text-[14px] rounded-[10px] bg-blue-400 hover:bg-blue-300 text-white lg:w-[336px] w-[236px] lg:py-[16px] py-[12px] mx-auto font-[600]"
               >
                 Submit
               </button>
