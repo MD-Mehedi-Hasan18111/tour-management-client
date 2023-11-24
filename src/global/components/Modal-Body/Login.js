@@ -59,6 +59,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     setIsLoad(true);
     const res = await LoginUser(userData);
     if (res?.status === 200) {
+      // console.log("login", res);
       setIsLoad(false);
       setIsOpenLoginModal(false);
       dispatch(setUser(res?.data?.data?.userData));

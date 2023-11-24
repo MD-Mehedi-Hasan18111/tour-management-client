@@ -20,4 +20,3 @@ export const LoginUser = async (data) => {
     return error;
   }
 };
-
