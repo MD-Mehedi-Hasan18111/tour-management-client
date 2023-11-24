@@ -11,7 +11,7 @@ import { setUser } from "@/global/redux/features/Profile/ProfileSlice";
 import { SiFirst } from "react-icons/si";
 import { BsPencil } from "react-icons/bs";
 
-const EditProfile = () => {
+const EditProfile = ({ setIsProfileEditModal }) => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -77,8 +77,8 @@ const EditProfile = () => {
     const res = await UpdateUser(userData);
     if (res?.status === 200) {
       setIsLoad(false);
-      console.log(res);
       dispatch(setUser(res?.data?.data));
+      setIsProfileEditModal(false);
     } else {
       setIsLoad(false);
       toast.error(res?.response?.data?.message);

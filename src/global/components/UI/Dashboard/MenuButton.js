@@ -10,7 +10,6 @@ const MenuButton = ({ menu, setIsOpen }) => {
 
   useEffect(() => {
     const pathNames = router.pathname.split("/");
-    console.log(pathNames);
     if (pathNames?.length === 2) {
       setActiveMenu("home");
     } else {

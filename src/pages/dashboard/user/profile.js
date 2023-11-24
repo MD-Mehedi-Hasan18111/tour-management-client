@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   // Log In Modal states
   const [isProfileEditModal, setIsProfileEditModal] = useState(false);
   const onCloseProfileModal = () => {
