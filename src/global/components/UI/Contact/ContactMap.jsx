@@ -2,9 +2,12 @@ import React from "react";
 
 const ContactMap = () => {
   return (
-    <div className="text-4xl font-bold text-center mb-8 bg-sky-200">
-      ContactMap
-      <p>mehedi will do it</p>
+    <div className="text-4xl mb-8">
+      <img
+        src="../../../../../images/map.png"
+        alt="google maps"
+        className="mx-auto"
+      />
     </div>
   );
 };
