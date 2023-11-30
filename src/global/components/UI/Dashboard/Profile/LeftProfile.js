@@ -1,49 +1,27 @@
 import { setUser } from "@/global/redux/features/Profile/ProfileSlice";
-import { UpdateUser } from "@/global/services/Profile";
+import { PhotoUploadToImageBB, UpdateUser } from "@/global/services/Profile";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const LeftProfile = () => {
-  const [image, setImage] = useState("");
   const [imageLink, setImageLink] = useState("");
   const hiddenFileInput = useRef(null);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
-    const imgname = event.target.files[0].name;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxSize = Math.max(img.width, img.height);
-        canvas.width = maxSize;
-        canvas.height = maxSize;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(
-          img,
-          (maxSize - img.width) / 2,
-          (maxSize - img.height) / 2
-        );
-        canvas.toBlob(
-          (blob) => {
-            const file = new File([blob], imgname, {
-              type: "image/png",
-              lastModified: Date.now(),
-            });
-            setImage(file);
-          },
-          "image/jpeg",
-          0.8
-        );
-      };
-    };
+    const data = new FormData();
+    data.append("image", file);
+    const res = await PhotoUploadToImageBB(data);
+    if (res?.status === 200) {
+      setImageLink(res?.data?.data?.display_url);
+      console.log(res);
+    } else {
+      toast.error("Something went wrong to upload image to imagebb");
+    }
   };
 
   // ================================================
@@ -51,17 +29,6 @@ const LeftProfile = () => {
   //   =====================================================
 
   const handleUploadButtonClick = async () => {
-    const data = new FormData();
-    data.append("image", image);
-    axios
-      .post(
-        "https://api.imgbb.com/1/upload?key=2e776485f3d339011e2d25b4f61ba6a1",
-        data
-      )
-      .then((res) => {
-        setImageLink(res.data.data.display_url);
-      });
-
     const userData = {
       profileImage: imageLink,
     };
@@ -75,14 +42,10 @@ const LeftProfile = () => {
 
   useEffect(() => {}, [imageLink]);
 
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
-  };
-
   return (
     <div className="image-upload-container">
       <div className="box-decoration flex flex-col items-center">
-        <div onClick={handleClick} className="cursor-pointer">
+        <div className="cursor-pointer">
           {imageLink ? (
             <img
               src={imageLink}
