@@ -8,7 +8,7 @@ const AboutWhy = () => {
   return (
     <div>
       {/* <div
-        class="w-full md:h-[600px] h-40 bg-no-repeat bg-center	bg-cover flex items-center justify-center text-white text-6xl font-bold"
+        className="w-full md:h-[600px] h-40 bg-no-repeat bg-center	bg-cover flex items-center justify-center text-white text-6xl font-bold"
         style={{
           backgroundImage: `url(${img.src})`,
         }}
@@ -22,8 +22,8 @@ const AboutWhy = () => {
       <p className="text-2xl font-bold text-center md:my-8 my-4">
         Why book with Bexper?
       </p>
-      <div class="flex md:flex-row flex-col gap-4">
-        <div class="md:basis-1/4 text-center p-8">
+      <div className="flex md:flex-row flex-col gap-4">
+        <div className="md:basis-1/4 text-center p-8">
           <BsFillPassFill className="text-8xl mx-auto text-sky-700 bg-sky-200 p-4 rounded-full" />
           <div>
             <h4 className="text-2xl font-semibold my-3">
@@ -35,7 +35,7 @@ const AboutWhy = () => {
             </p>
           </div>
         </div>
-        <div class="md:basis-1/4 text-center p-8">
+        <div className="md:basis-1/4 text-center p-8">
           <FaSuitcaseRolling className="text-8xl mx-auto text-pink-700 bg-pink-200 p-4 rounded-full" />
           <div>
             <h4 className="text-2xl font-semibold my-3">
@@ -47,7 +47,7 @@ const AboutWhy = () => {
             </p>
           </div>
         </div>
-        <div class="md:basis-1/4 text-center p-8">
+        <div className="md:basis-1/4 text-center p-8">
           <BiSolidBookAdd className="text-8xl mx-auto text-yellow-700 bg-yellow-200 p-4 rounded-full" />
           <div>
             <h4 className="text-2xl font-semibold my-3">Quality at our core</h4>
@@ -57,7 +57,7 @@ const AboutWhy = () => {
             </p>
           </div>
         </div>
-        <div class="md:basis-1/4 text-center p-8">
+        <div className="md:basis-1/4 text-center p-8">
           <BsFillTrophyFill className="text-8xl mx-auto text-violet-700 bg-violet-200 p-4 rounded-full" />
           <div>
             <h4 className="text-2xl font-semibold my-3">

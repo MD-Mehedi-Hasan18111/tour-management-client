@@ -6,7 +6,7 @@ import { GoLocation } from "react-icons/go";
 const ContactForm = () => {
   return (
     <div className="md:flex items-center flex-row md:my-40 my-16">
-      <div class="md:basis-2/3 w-full flex flex-col items-center">
+      <div className="md:basis-2/3 w-full flex flex-col items-center">
         <h3 className="text-4xl font-semibold"> Get in touch </h3>
         <p className="text-xl my-4 mx-8">
           Your email address will not be published. Required fields are marked *
@@ -33,7 +33,7 @@ const ContactForm = () => {
           <button className="btn btn-info md:px-40 px-6 ">Post Message </button>
         </form>
       </div>
-      <div class="md:basis-1/3 w-full my-8 md:gap-7 gap-0">
+      <div className="md:basis-1/3 w-full my-8 md:gap-7 gap-0">
         <div>
           <div className="flex items-center justify-evenly p-4 gap-4 bg-gray-100 md:w-4/6 w-full rounded-md">
             <CgMail className="text-6xl text-sky-500" />

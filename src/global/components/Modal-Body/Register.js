@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setToken, setUser } from "@/global/redux/features/Auth/AuthSlice";
 import { toast } from "react-toastify";
 import MyToastify from "../Shared/MyToastify";
+import axios from "axios";
 
 // Email regular expression
 const regexEmailValidation =
@@ -31,7 +32,9 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   const [errorEmail, setErrorEmail] = useState("");
   const [isLoad, setIsLoad] = useState(false);
 
-  // Email input validation
+  //  ============================
+  //      Email input validation
+  //   ================================
   const handleEmail = (e) => {
     if (regexEmailValidation.test(e.target.value) || e.target.value === "") {
       setEmail(e.target.value);
@@ -41,7 +44,9 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     }
   };
 
-  // Password input validation
+  //  ===============================
+  //      Password input validation
+  //   ==================================
   const handlePassword = (e) => {
     setPassword(e.target.value);
     if (regexPasswordValidation.test(e.target.value) || e.target.value === "") {
@@ -57,20 +62,34 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   const [openDropdown1, setOpenDropdown1] = useState(false);
   const [countries, setCountries] = useState([]);
   const [selectCountry1, setSelectCountry1] = useState("");
-  useEffect(() => {
-    fetch("https://restcountries.com/v2/all")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data.sort((a, b) => a.name.localeCompare(b.name)));
-        const myC = data.find(
-          (country) => country.altSpellings && country.altSpellings[0] === "BD"
-        );
-        setSelectCountry1(myC);
-        setMobileCode(`+${myC.callingCodes[0]}`);
-      });
-  }, []);
 
-  // Outside click remove dropdown Wrapper Function
+  //   =============================
+  //      phone number code handle
+  //   ==================================
+  const fetchCountries = async () => {
+    try {
+      const data = await axios("https://restcountries.com/v3.1/all");
+      const sortData = Object.keys(data).sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setCountries(sortData);
+      const myC = data.find(
+        (country) => country.altSpellings && country.altSpellings[0] === "BD"
+      );
+      setSelectCountry1(myC);
+      setMobileCode(`+${myC.callingCodes[0]}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCountries();
+  }, [countries]);
+
+  //  =====================================================
+  //     Outside click remove dropdown Wrapper Function
+  //   ==========================================================
   const wrapperRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
@@ -86,9 +105,9 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     };
   }, [wrapperRef]);
 
-  /******************************
-    Sign Up User Integration
-    *****************************/
+  // ==============================
+  //     Sign Up User Integration
+  //   =================================
   const signUpUser = async (e) => {
     e.preventDefault();
     const userData = {
@@ -104,7 +123,6 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     const res = await RegisterUser(userData);
     if (res?.status === 200) {
       setIsLoad(false);
-      // console.log(res);
       setIsOpenRegisterModal(false);
       dispatch(setUser(res?.data?.data?.userData));
       dispatch(setToken(res?.data?.data?.accessToken));
@@ -118,7 +136,7 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   return (
     <>
       <MyToastify />
-      <div class="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         <h3 className="lg:text-[24px] text-[20px] flex items-center font-bold my-6">
           {" "}
           <span className="me-3">
@@ -262,7 +280,9 @@ const Register = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
                     openDropdown1 ? "block" : "hidden"
                   } absolute md:bottom-14 bottom-10 left-0 right-0 z-30 bg-white h-[220px] overflow-y-scroll border-2 border-gray-300 rounded-b-[14px]`}
                 >
-                  {/* Singapore Indonesia Country find */}
+                  {/*===================================
+                        Singapore Indonesia Country find
+                   ========================================== */}
                   {countries
                     ?.filter(
                       (con) =>

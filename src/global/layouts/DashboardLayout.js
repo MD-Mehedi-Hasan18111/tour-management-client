@@ -42,7 +42,7 @@ const DashboardLayout = ({ children }) => {
             </h3>
             <div className="flex flex-col space-y-6">
               {userMenus?.map((menu, i) => {
-                return <MenuButton menu={menu} setIsOpen={setIsOpen} />;
+                return <MenuButton menu={menu} setIsOpen={setIsOpen} key={i} />;
               })}
             </div>
             <button
@@ -80,7 +80,9 @@ const DashboardLayout = ({ children }) => {
               <h3 className="text-[16px] font-[500] mb-4 ml-3">MENU</h3>
               <div className="flex flex-col space-y-6">
                 {userMenus?.map((menu, i) => {
-                  return <MenuButton menu={menu} setIsOpen={setIsOpen} />;
+                  return (
+                    <MenuButton menu={menu} setIsOpen={setIsOpen} key={i} />
+                  );
                 })}
               </div>
             </div>

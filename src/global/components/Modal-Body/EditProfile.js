@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import MyToastify from "../Shared/MyToastify";
-import { GrMail } from "react-icons/gr";
 import { IoIosArrowDown, IoIosArrowUp, IoMdGlobe } from "react-icons/io";
 import { useRef } from "react";
 import { UpdateUser } from "@/global/services/Profile";
 import { toast } from "react-toastify";
 import { setUser } from "@/global/redux/features/Profile/ProfileSlice";
-import { SiFirst } from "react-icons/si";
 import { BsPencil } from "react-icons/bs";
 
 const EditProfile = ({ setIsProfileEditModal }) => {
@@ -32,18 +30,30 @@ const EditProfile = ({ setIsProfileEditModal }) => {
   const [openDropdown1, setOpenDropdown1] = useState(false);
   const [countries, setCountries] = useState([]);
   const [selectCountry1, setSelectCountry1] = useState("");
+
+  // ================================
+  //     phone number code handle
+  // =======================================
+  const fetchCountries = async () => {
+    try {
+      const data = await axios("https://restcountries.com/v3.1/all");
+      const sortData = Object.keys(data).sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setCountries(sortData);
+      const myC = data.find(
+        (country) => country.altSpellings && country.altSpellings[0] === "BD"
+      );
+      setSelectCountry1(myC);
+      setMobileCode(`+${myC.callingCodes[0]}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data.sort((a, b) => a.name.localeCompare(b.name)));
-        const myC = data.find(
-          (country) => country.altSpellings && country.altSpellings[0] === "BD"
-        );
-        setSelectCountry1(myC);
-        setMobileCode(`+${myC.callingCodes[0]}`);
-      });
-  }, []);
+    fetchCountries();
+  }, [countries]);
 
   // Outside click remove dropdown Wrapper Function
   const wrapperRef = useRef(null);
@@ -88,7 +98,7 @@ const EditProfile = ({ setIsProfileEditModal }) => {
   return (
     <>
       <MyToastify />
-      <div class="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         <h3 className="lg:text-[24px] text-[20px] flex items-center font-bold my-6">
           {" "}
           <span className="me-3">

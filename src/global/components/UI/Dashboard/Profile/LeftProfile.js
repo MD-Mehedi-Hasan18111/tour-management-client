@@ -1,9 +1,7 @@
 import { setUser } from "@/global/redux/features/Profile/ProfileSlice";
-import { UpdatePropile, UpdateUser } from "@/global/services/Profile";
-import Profile from "@/pages/dashboard/admin/profile";
+import { UpdateUser } from "@/global/services/Profile";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { CgScrollH } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -12,8 +10,8 @@ const LeftProfile = () => {
   const [imageLink, setImageLink] = useState("");
   const hiddenFileInput = useRef(null);
   const user = useSelector((state) => state.auth.user);
-  // console.log("useSelector user=", user);
   const dispatch = useDispatch();
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const imgname = event.target.files[0].name;
@@ -39,10 +37,7 @@ const LeftProfile = () => {
               type: "image/png",
               lastModified: Date.now(),
             });
-
-            // console.log(file);
             setImage(file);
-            // handleUploadButtonClick(file);
           },
           "image/jpeg",
           0.8
@@ -50,6 +45,10 @@ const LeftProfile = () => {
       };
     };
   };
+
+  // ================================================
+  //      imgbb image post and update profileImage
+  //   =====================================================
 
   const handleUploadButtonClick = async () => {
     const data = new FormData();
@@ -68,7 +67,6 @@ const LeftProfile = () => {
     };
     const res = await UpdateUser(userData);
     if (res?.status === 200) {
-      console.log(res);
       dispatch(setUser(res?.data?.data));
     } else {
       toast.error(res?.response?.data?.message);
@@ -83,28 +81,29 @@ const LeftProfile = () => {
 
   return (
     <div className="image-upload-container">
-      <div className="box-decoration">
-        <label
-          htmlFor="image-upload-input"
-          className="image-upload-label relative"
-        >
-          {imageLink ? imageLink.name : "Choose an image"}
-        </label>
-        <div onClick={handleClick} style={{ cursor: "pointer" }}>
+      <div className="box-decoration flex flex-col items-center">
+        <div onClick={handleClick} className="cursor-pointer">
           {imageLink ? (
             <img
               src={imageLink}
-              // src=""
               alt="upload image"
-              className="img-display-after w-[150px] h-[150px] rounded-full mx-auto relative"
+              className="img-display-after w-[150px] h-[150px] rounded-full "
+            />
+          ) : user?.profileImage ? (
+            <img
+              src={user?.profileImage}
+              alt="User"
+              className="md:h-[120px] md:w-[120px] h-[30px] w-[30px] mx-auto rounded-full"
             />
           ) : (
-            <div className="bg-[#0D1218] md:h-[88px] h-[40px] md:w-[88px] w-[40px] mx-auto rounded-[50%] flex items-center justify-center Dm text-white font-[700] md:text-[18px] text-[14px]">
+            <div className="bg-[#0D1218] md:h-[120px] h-[30px] md:w-[120px] w-[30px] rounded-[50%] flex items-center justify-center Dm text-white font-[700] md:text-[18px] text-[14px]">
               {user?.firstName?.charAt(0)}
               {user?.lastName?.charAt(0)}
             </div>
           )}
-
+          <label htmlFor="image-upload-input" className="image-upload-label ">
+            {imageLink ? imageLink.name : "Choose an image"}
+          </label>
           <input
             id="image-upload-input"
             className="h-1/6 w-1/6"

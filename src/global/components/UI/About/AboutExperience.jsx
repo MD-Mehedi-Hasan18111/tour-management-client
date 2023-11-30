@@ -3,13 +3,13 @@ import img from "../../../../../public/images/bg.png";
 const AboutExperience = () => {
   return (
     <div
-      class="w-full bg-no-repeat bg-center bg-screen md:my-10 my-4"
+      className="w-full bg-no-repeat bg-center bg-screen md:my-10 my-4"
       style={{
         backgroundImage: `url(${img.src})`,
       }}
     >
-      <div class="md:flex md:flex-row flex-col md:gap-y-16 gap-y-0 md:gap-6">
-        <div class="md:basis-1/2 w-full my-auto md:text-start text-center">
+      <div className="md:flex md:flex-row flex-col md:gap-y-16 gap-y-0 md:gap-6">
+        <div className="md:basis-1/2 w-full my-auto md:text-start text-center">
           <div className=" md:px-32 md:pt-32 md:pb-16 px-4 pt-4 pb-4">
             <h2 className="text-4xl font-semibold">Our Experience</h2>
             <h2 className="md:text-3xl text-2xl font-bold">
@@ -53,9 +53,9 @@ const AboutExperience = () => {
             </div>
           </div>
         </div>
-        <div class="md:basis-1/2 w-full">
-          <div class="flex md:flex-row flex-col">
-            <div class="basis-1/2 ">
+        <div className="md:basis-1/2 w-full">
+          <div className="flex md:flex-row flex-col">
+            <div className="basis-1/2 ">
               <img
                 src="../../../../../images/about1.webp"
                 alt="about1"
@@ -67,7 +67,7 @@ const AboutExperience = () => {
                 className="p-5 hover:scale-105"
               />
             </div>
-            <div class="basis-1/2 mt-16">
+            <div className="basis-1/2 mt-16">
               <img
                 src="../../../../../images/about3.webp"
                 alt="about3"

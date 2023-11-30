@@ -47,6 +47,7 @@ const BestOffer = () => {
       <div className="basis-2/3" data-aos="fade-right">
         <Image
           src="https://demo2.themelexus.com/bexper/wp-content/uploads/2023/08/h4-img-bg01.jpg"
+          alt="best choices"
           height={700}
           width={700}
         />

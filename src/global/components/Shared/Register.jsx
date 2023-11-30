@@ -13,7 +13,7 @@ const Register = () => {
 
   return (
     <div
-      class="flex md:flex-row flex-col justify-center items-center h-[80vh]"
+      className="flex md:flex-row flex-col justify-center items-center h-[80vh]"
       style={{
         // use the src property of the image object
         backgroundImage: `url(${backgroundImage.src})`,
@@ -23,7 +23,7 @@ const Register = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div class=" drop-shadow-lg ">
+      <div className=" drop-shadow-lg ">
         <form className="container  md:w-[800px] w-full bg-white p-16 ">
           <div className="space-y-12 ">
             <div className="border-b mx-auto border-gray-900/10 pb-12">

@@ -25,7 +25,9 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   const [errorEmail, setErrorEmail] = useState("");
   const [isLoad, setIsLoad] = useState(false);
 
-  // Email input validation
+  // ================================
+  //     Email input validation
+  //   ===================================
   const handleEmail = (e) => {
     if (regexEmailValidation.test(e.target.value) || e.target.value === "") {
       setEmail(e.target.value);
@@ -34,7 +36,9 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
       setErrorEmail("Enter valid email address ");
     }
   };
-  // Password input validation
+  // ===============================
+  //   Password input validation
+  // ====================================
   const handlePassword = (e) => {
     setPassword(e.target.value);
     if (regexPasswordValidation.test(e.target.value) || e.target.value === "") {
@@ -59,7 +63,6 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
     setIsLoad(true);
     const res = await LoginUser(userData);
     if (res?.status === 200) {
-      // console.log("login", res);
       setIsLoad(false);
       setIsOpenLoginModal(false);
       dispatch(setUser(res?.data?.data?.userData));
@@ -76,7 +79,7 @@ const Login = ({ setIsOpenLoginModal, setIsOpenRegisterModal }) => {
   return (
     <>
       <MyToastify />
-      <div class="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         <h3 className="lg:text-[24px] text-[20px] flex items-center font-bold my-6">
           {" "}
           <span className="me-3">
