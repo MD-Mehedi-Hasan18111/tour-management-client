@@ -32,7 +32,7 @@ const Profile = () => {
             <div>
               <div className="text-xl">
                 <div className="flex flex-row my-4">
-                  <div className="basis-1/3 font-medium">Rule</div>
+                  <div className="basis-1/3 font-medium">Role</div>
                   <div className="basis-1/3 border-b-2 uppercase border-gray-200 ps-4">
                     {user?.role}
                   </div>

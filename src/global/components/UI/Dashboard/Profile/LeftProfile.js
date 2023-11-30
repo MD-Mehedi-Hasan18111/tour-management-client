@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const LeftProfile = () => {
   const [imageLink, setImageLink] = useState("");
+  const [isLoad, setIsLoad] = useState(false);
   const hiddenFileInput = useRef(null);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -16,10 +17,13 @@ const LeftProfile = () => {
     const data = new FormData();
     data.append("image", file);
     const res = await PhotoUploadToImageBB(data);
+    setIsLoad(true);
     if (res?.status === 200) {
+      setIsLoad(false);
       setImageLink(res?.data?.data?.display_url);
       console.log(res);
     } else {
+      setIsLoad(false);
       toast.error("Something went wrong to upload image to imagebb");
     }
   };
@@ -28,38 +32,45 @@ const LeftProfile = () => {
   //      imgbb image post and update profileImage
   //   =====================================================
 
-  const handleUploadButtonClick = async () => {
+  const handleUploadButtonClick = async (e) => {
     const userData = {
       profileImage: imageLink,
     };
+    setIsLoad(true);
     const res = await UpdateUser(userData);
     if (res?.status === 200) {
+      setIsLoad(false);
       dispatch(setUser(res?.data?.data));
     } else {
+      setIsLoad(false);
       toast.error(res?.response?.data?.message);
     }
   };
-
-  useEffect(() => {}, [imageLink]);
 
   return (
     <div className="image-upload-container">
       <div className="box-decoration flex flex-col items-center">
         <div className="cursor-pointer">
-          {imageLink ? (
-            <img
-              src={imageLink}
-              alt="upload image"
-              className="img-display-after w-[150px] h-[150px] rounded-full "
-            />
+          {imageLink && isLoad ? (
+            <>
+              {/*  ===============before upload & update image================== */}
+              <span className="loading loading-spinner loading-md"></span>
+              <img
+                src={imageLink}
+                alt="upload image"
+                className="img-display-after w-[150px] h-[150px] object-center border-4"
+              />
+            </>
           ) : user?.profileImage ? (
+            // ===============after upload & update image==================
             <img
               src={user?.profileImage}
               alt="User"
-              className="md:h-[120px] md:w-[120px] h-[30px] w-[30px] mx-auto rounded-full"
+              // className="md:h-[220px] md:w-[120px] h-[30px] w-[30px] mx-auto rounded"
+              className=" w-[150px] h-[150px]  object-center border-4"
             />
           ) : (
-            <div className="bg-[#0D1218] md:h-[120px] h-[30px] md:w-[120px] w-[30px] rounded-[50%] flex items-center justify-center Dm text-white font-[700] md:text-[18px] text-[14px]">
+            <div className="bg-[#0D1218] md:h-[120px] h-[30px] md:w-[120px] w-[30px]  flex items-center justify-center Dm text-white font-[700] md:text-[18px] text-[14px]">
               {user?.firstName?.charAt(0)}
               {user?.lastName?.charAt(0)}
             </div>
@@ -76,13 +87,16 @@ const LeftProfile = () => {
             style={{ display: "none" }}
           />
         </div>
-
-        <button
-          className="my-10 lg:text-[16px] text-[14px] rounded-[10px] bg-blue-400 hover:bg-blue-300 text-white lg:w-[336px] w-[236px] lg:py-[16px] py-[12px] mx-auto font-[600]"
-          onClick={handleUploadButtonClick}
-        >
-          Upload
-        </button>
+        {!imageLink ? (
+          ""
+        ) : (
+          <button
+            className=" my-10 lg:text-[16px] text-[14px] rounded-[10px] bg-blue-400 hover:bg-blue-300 text-white lg:w-[336px] w-[236px] lg:py-[16px] py-[12px] mx-auto font-[600]"
+            onClick={handleUploadButtonClick}
+          >
+            Upload
+          </button>
+        )}
       </div>
     </div>
   );

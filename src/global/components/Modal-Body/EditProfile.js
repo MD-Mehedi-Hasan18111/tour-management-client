@@ -8,6 +8,7 @@ import { UpdateUser } from "@/global/services/Profile";
 import { toast } from "react-toastify";
 import { setUser } from "@/global/redux/features/Profile/ProfileSlice";
 import { BsPencil } from "react-icons/bs";
+import axios from "axios";
 
 const EditProfile = ({ setIsProfileEditModal }) => {
   const user = useSelector((state) => state.auth.user);
